@@ -1,4 +1,4 @@
-package com.tiago.apiplantacao.entity;
+package com.tiago.apiplantacao.model;
 
 import java.util.Set;
 
@@ -21,13 +21,15 @@ import lombok.NoArgsConstructor;
 @Table
 @Data
 public class Canteiro {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
     private Double area;
 
-    @ManyToOne @JoinColumn(name = "fk_Responsavel_Id")
+    @ManyToOne
+    @JoinColumn(name = "fk_Responsavel_Id")
     private Responsavel responsavel;
 
     @ManyToMany(fetch = FetchType.EAGER)

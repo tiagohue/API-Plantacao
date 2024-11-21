@@ -1,4 +1,4 @@
-package com.tiago.apiplantacao.entity;
+package com.tiago.apiplantacao.model;
 
 import java.util.Set;
 
@@ -15,7 +15,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 public class Insumo {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String descricao;
