@@ -22,4 +22,11 @@ public class CanteiroController {
         return canteiroRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Canteiro> getCanteiroById(@PathVariable Long id) {
+        return canteiroRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 }
