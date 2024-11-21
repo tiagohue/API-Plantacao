@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.tiago.apiplantacao.model.Canteiro;
 
-public interface CanteiroRepository extends JpaRepository<Canteiro, Integer>{
+public interface CanteiroRepository extends JpaRepository<Canteiro, Long>{
     
 }

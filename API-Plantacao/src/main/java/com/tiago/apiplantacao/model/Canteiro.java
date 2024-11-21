@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class Canteiro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column
     private Double area;

@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.tiago.apiplantacao.model.Insumo;
 
-public interface InsumoRepository extends JpaRepository<Insumo, Integer>{
+public interface InsumoRepository extends JpaRepository<Insumo, Long>{
 
 }
