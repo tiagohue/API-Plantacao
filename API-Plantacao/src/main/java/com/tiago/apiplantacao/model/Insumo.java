@@ -24,6 +24,10 @@ public class Insumo {
     @ManyToMany(mappedBy = "insumos", fetch = FetchType.EAGER)
     Set<Canteiro> canteiros;
 
+    public Insumo(String descricao) {
+        setDescricao(descricao);
+    }
+
     @Override
     public String toString() {
         return "Id: " + id +

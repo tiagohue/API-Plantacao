@@ -26,6 +26,11 @@ public class Planta {
     @ManyToMany(mappedBy = "plantas", fetch = FetchType.EAGER)
     Set<Canteiro> canteiros;
 
+    public Planta(String nome, Integer periodo_colheita) {
+        setNome(nome);
+        setPeriodo_colheita(periodo_colheita);
+    }
+
     @Override
     public String toString() {
         return "Id: " + id +

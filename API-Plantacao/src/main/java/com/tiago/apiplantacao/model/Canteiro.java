@@ -48,6 +48,11 @@ public class Canteiro {
     )
     Set<Insumo> insumos;
 
+    public Canteiro(Double area, Responsavel responsavel) {
+        setArea(area);
+        setResponsavel(responsavel);
+    }
+
     @Override
     public String toString() {
         return "Id: " + id +
