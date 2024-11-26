@@ -2,6 +2,7 @@ package com.tiago.apiplantacao.model;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,13 +14,15 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table
-@Data
+@Getter
 public class Canteiro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +41,7 @@ public class Canteiro {
         joinColumns = @JoinColumn(name = "canteiro_id"), 
         inverseJoinColumns = @JoinColumn(name = "planta_id")
     )
+    @JsonManagedReference
     Set<Planta> plantas;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -46,11 +50,12 @@ public class Canteiro {
         joinColumns = @JoinColumn(name = "canteiro_id"), 
         inverseJoinColumns = @JoinColumn(name = "insumo_id")
     )
+    @JsonManagedReference
     Set<Insumo> insumos;
 
     public Canteiro(Double area, Responsavel responsavel) {
-        setArea(area);
-        setResponsavel(responsavel);
+        this.area = area;
+        this.responsavel = responsavel;
     }
 
     @Override
