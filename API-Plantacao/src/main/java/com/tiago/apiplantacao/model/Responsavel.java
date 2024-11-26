@@ -15,6 +15,7 @@ public class Responsavel {
     @Column(nullable = false)
     private String nome;
 
+    @Builder
     public Responsavel(String nome) {
         this.nome = nome;
     }

@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,6 +26,7 @@ public class Planta {
     @JsonBackReference
     Set<Canteiro> canteiros;
 
+    @Builder
     public Planta(String nome, Integer periodo_colheita) {
         this.nome = nome;
         this.periodo_colheita = periodo_colheita;

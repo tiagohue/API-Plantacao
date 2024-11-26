@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +24,7 @@ public class Insumo {
     @JsonBackReference
     Set<Canteiro> canteiros;
 
+    @Builder
     public Insumo(String descricao) {
         this.descricao = descricao;
     }
