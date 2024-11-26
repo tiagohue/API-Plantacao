@@ -1,12 +1,11 @@
 package com.tiago.apiplantacao.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
 @NoArgsConstructor
 @Entity
+@Getter
 public class Responsavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +16,7 @@ public class Responsavel {
     private String nome;
 
     public Responsavel(String nome) {
-        setNome(nome);
+        this.nome = nome;
     }
 
     @Override
