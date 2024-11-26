@@ -3,12 +3,7 @@ package com.tiago.apiplantacao.model;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,8 +13,10 @@ import lombok.NoArgsConstructor;
 public class Insumo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true)
     private Long id;
 
+    @Column(nullable = false)
     private String descricao;
 
     @ManyToMany(mappedBy = "insumos", fetch = FetchType.EAGER)

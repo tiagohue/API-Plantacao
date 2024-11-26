@@ -1,9 +1,6 @@
 package com.tiago.apiplantacao.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,8 +10,10 @@ import lombok.NoArgsConstructor;
 public class Responsavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
 
     public Responsavel(String nome) {

@@ -26,9 +26,10 @@ import lombok.NoArgsConstructor;
 public class Canteiro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private Double area;
 
     @ManyToOne
