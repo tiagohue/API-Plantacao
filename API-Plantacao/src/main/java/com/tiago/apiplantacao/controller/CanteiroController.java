@@ -1,32 +1,52 @@
 package com.tiago.apiplantacao.controller;
 
-import com.tiago.apiplantacao.model.Canteiro;
-import com.tiago.apiplantacao.repository.CanteiroRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.tiago.apiplantacao.dto.request.CanteiroRequestDTO;
+import com.tiago.apiplantacao.dto.response.CanteiroResponseDTO;
+import com.tiago.apiplantacao.service.CanteiroService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/canteiros")
+@RequiredArgsConstructor
 public class CanteiroController {
 
-    @Autowired
-    private CanteiroRepository canteiroRepository;
+    private final CanteiroService canteiroService;
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CanteiroResponseDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(canteiroService.findById(id));
+    }
 
     @GetMapping
-    public List<Canteiro> getAllCanteiros() {
-        return canteiroRepository.findAll();
+    public ResponseEntity<List<CanteiroResponseDTO>> findAll() {
+        return ResponseEntity.ok().body(canteiroService.findAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Canteiro> getCanteiroById(@PathVariable Long id) {
-        return canteiroRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @PostMapping
+    public ResponseEntity<CanteiroResponseDTO> register(
+            @RequestBody CanteiroRequestDTO canteiroRequestDTO,
+            UriComponentsBuilder uriBuilder) {
+
+        CanteiroResponseDTO canteiroResponseDTO = canteiroService.register(canteiroRequestDTO);
+        URI uri = uriBuilder.path("/canteiros/{id}").buildAndExpand(canteiroResponseDTO.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(canteiroResponseDTO);
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CanteiroResponseDTO> update(@RequestBody CanteiroRequestDTO canteiroDTO,
+                                                       @PathVariable Long id) {
+        return ResponseEntity.ok().body(canteiroService.update(canteiroDTO, id));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        return ResponseEntity.ok().body(canteiroService.delete(id));
+    }
 }
