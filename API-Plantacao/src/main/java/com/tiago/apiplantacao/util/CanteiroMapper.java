@@ -3,7 +3,6 @@ package com.tiago.apiplantacao.util;
 import com.tiago.apiplantacao.dto.request.CanteiroRequestDTO;
 import com.tiago.apiplantacao.dto.response.CanteiroResponseDTO;
 import com.tiago.apiplantacao.model.Canteiro;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
