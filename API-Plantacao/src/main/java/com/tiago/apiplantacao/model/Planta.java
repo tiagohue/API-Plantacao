@@ -7,10 +7,12 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Entity
 @Getter
+@Setter
 public class Planta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
