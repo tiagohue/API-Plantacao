@@ -6,6 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Getter
+@Setter
 public class Responsavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
