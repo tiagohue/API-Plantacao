@@ -23,6 +23,11 @@ public class ResponsavelController {
         return ResponseEntity.ok().body(responsavelService.findById(id));
     }
 
+    @GetMapping(value = "/nome/{nome}")
+    public ResponseEntity<List<ResponsavelResponseDTO>> findByNome(@PathVariable String nome) {
+        return ResponseEntity.ok().body(responsavelService.findByNome(nome));
+    }
+
     @GetMapping
     public ResponseEntity<List<ResponsavelResponseDTO>> findAll() {
         return ResponseEntity.ok().body(responsavelService.findAll());

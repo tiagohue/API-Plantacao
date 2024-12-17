@@ -23,6 +23,11 @@ public class InsumoController {
         return ResponseEntity.ok().body(insumoService.findById(id));
     }
 
+    @GetMapping(value = "/desc/{desc}")
+    public ResponseEntity<List<InsumoResponseDTO>> findByDesc(@PathVariable String desc) {
+        return ResponseEntity.ok().body(insumoService.findByDesc(desc));
+    }
+
     @GetMapping
     public ResponseEntity<List<InsumoResponseDTO>> findAll() {
         return ResponseEntity.ok().body(insumoService.findAll());

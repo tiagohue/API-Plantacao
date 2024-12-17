@@ -24,6 +24,13 @@ public class ResponsavelServiceImpl implements ResponsavelService{
     }
 
     @Override
+    public List<ResponsavelResponseDTO> findByNome(String nome) {
+        List<Responsavel> responsaveis = responsavelRepository.findByNomeContaining(nome);
+
+        return responsavelMapper.toResponsavelDTO(responsaveis);
+    }
+
+    @Override
     public List<ResponsavelResponseDTO> findAll() {
         return responsavelMapper.toResponsavelDTO(responsavelRepository.findAll());
     }
@@ -50,7 +57,7 @@ public class ResponsavelServiceImpl implements ResponsavelService{
         return "Responsavel de id: " + id + " foi deletado.";
     }
 
-    private Responsavel returnResponsavel(Long id) {
+    public Responsavel returnResponsavel(Long id) {
         return responsavelRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Responsavel não encontrado."));
     }

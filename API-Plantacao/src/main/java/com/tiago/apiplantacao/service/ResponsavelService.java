@@ -8,6 +8,8 @@ import java.util.List;
 public interface ResponsavelService {
     ResponsavelResponseDTO findById(Long id);
 
+    List<ResponsavelResponseDTO> findByNome(String nome);
+
     List<ResponsavelResponseDTO> findAll();
 
     ResponsavelResponseDTO register(ResponsavelRequestDTO canteiroDTO);
