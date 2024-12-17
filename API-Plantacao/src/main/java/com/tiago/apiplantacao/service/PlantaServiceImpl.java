@@ -5,11 +5,13 @@ import com.tiago.apiplantacao.dto.response.PlantaResponseDTO;
 import com.tiago.apiplantacao.model.Planta;
 import com.tiago.apiplantacao.repository.PlantaRepository;
 import com.tiago.apiplantacao.util.PlantaMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Primary
@@ -51,10 +53,19 @@ public class PlantaServiceImpl implements PlantaService{
         return plantaMapper.toPlantaDTO(plantaRepository.save(planta));
     }
 
-    @Override
+    @Override @Transactional
     public String delete(Long id) {
+        Planta planta = returnPlanta(id);
+
+        planta.getCanteiros().forEach(canteiro -> {
+            Set<Planta> plantaSet = canteiro.getPlantas();
+            plantaSet.remove(planta);
+
+            canteiro.setPlantas(plantaSet);
+        });
+
         plantaRepository.deleteById(id);
-        return "Planta de id: " + id + " foi deletado.";
+        return "Planta de id: " + id + " foi deletada.";
     }
 
     private Planta returnPlanta(Long id) {
