@@ -24,6 +24,13 @@ public class InsumoServiceImpl implements InsumoService{
     }
 
     @Override
+    public List<InsumoResponseDTO> findByDesc(String desc) {
+        List<Insumo> insumos = insumoRepository.findByDescricaoContaining(desc);
+
+        return insumoMapper.toInsumoDTO(insumos);
+    }
+
+    @Override
     public List<InsumoResponseDTO> findAll() {
         return insumoMapper.toInsumoDTO(insumoRepository.findAll());
     }

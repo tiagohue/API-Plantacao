@@ -8,6 +8,8 @@ import java.util.List;
 public interface InsumoService {
     InsumoResponseDTO findById(Long id);
 
+    List<InsumoResponseDTO> findByDesc(String desc);
+
     List<InsumoResponseDTO> findAll();
 
     InsumoResponseDTO register(InsumoRequestDTO canteiroDTO);
