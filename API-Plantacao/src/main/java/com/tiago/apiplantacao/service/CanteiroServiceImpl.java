@@ -2,9 +2,13 @@ package com.tiago.apiplantacao.service;
 
 import com.tiago.apiplantacao.dto.request.CanteiroRequestDTO;
 import com.tiago.apiplantacao.dto.response.CanteiroResponseDTO;
+import com.tiago.apiplantacao.dto.response.ResponsavelResponseDTO;
 import com.tiago.apiplantacao.model.Canteiro;
+import com.tiago.apiplantacao.model.Responsavel;
 import com.tiago.apiplantacao.repository.CanteiroRepository;
+import com.tiago.apiplantacao.repository.ResponsavelRepository;
 import com.tiago.apiplantacao.util.CanteiroMapper;
+import com.tiago.apiplantacao.util.ResponsavelMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -17,6 +21,9 @@ import java.util.List;
 public class CanteiroServiceImpl implements CanteiroService{
     private final CanteiroRepository canteiroRepository;
     private final CanteiroMapper canteiroMapper;
+
+    private final ResponsavelServiceImpl responsavelService;
+    private final ResponsavelMapper responsavelMapper;
 
     @Override
     public CanteiroResponseDTO findById(Long id) {
@@ -31,6 +38,9 @@ public class CanteiroServiceImpl implements CanteiroService{
     @Override
     public CanteiroResponseDTO register(CanteiroRequestDTO canteiroDTO) {
         Canteiro canteiro = canteiroMapper.toCanteiro(canteiroDTO);
+
+        Responsavel responsavel = responsavelService.returnResponsavel(canteiro.getResponsavel().getId());
+        canteiro.setResponsavel(responsavel);
 
         return canteiroMapper.toCanteiroDTO(canteiroRepository.save(canteiro));
     }
