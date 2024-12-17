@@ -5,6 +5,7 @@ import com.tiago.apiplantacao.dto.response.ResponsavelResponseDTO;
 import com.tiago.apiplantacao.model.Responsavel;
 import com.tiago.apiplantacao.repository.ResponsavelRepository;
 import com.tiago.apiplantacao.util.ResponsavelMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -35,14 +36,14 @@ public class ResponsavelServiceImpl implements ResponsavelService{
         return responsavelMapper.toResponsavelDTO(responsavelRepository.findAll());
     }
 
-    @Override
+    @Override @Transactional
     public ResponsavelResponseDTO register(ResponsavelRequestDTO responsavelDTO) {
         Responsavel responsavel = responsavelMapper.toResponsavel(responsavelDTO);
 
         return responsavelMapper.toResponsavelDTO(responsavelRepository.save(responsavel));
     }
 
-    @Override
+    @Override @Transactional
     public ResponsavelResponseDTO update(ResponsavelRequestDTO responsavelDTO, Long id) {
         Responsavel responsavel = returnResponsavel(id);
 
@@ -51,7 +52,7 @@ public class ResponsavelServiceImpl implements ResponsavelService{
         return responsavelMapper.toResponsavelDTO(responsavelRepository.save(responsavel));
     }
 
-    @Override
+    @Override @Transactional
     public String delete(Long id) {
         responsavelRepository.deleteById(id);
         return "Responsavel de id: " + id + " foi deletado.";

@@ -37,14 +37,14 @@ public class PlantaServiceImpl implements PlantaService{
         return plantaMapper.toPlantaDTO(plantaRepository.findAll());
     }
 
-    @Override
+    @Override @Transactional
     public PlantaResponseDTO register(PlantaRequestDTO plantaDTO) {
         Planta planta = plantaMapper.toPlanta(plantaDTO);
 
         return plantaMapper.toPlantaDTO(plantaRepository.save(planta));
     }
 
-    @Override
+    @Override @Transactional
     public PlantaResponseDTO update(PlantaRequestDTO plantaDTO, Long id) {
         Planta planta = returnPlanta(id);
 

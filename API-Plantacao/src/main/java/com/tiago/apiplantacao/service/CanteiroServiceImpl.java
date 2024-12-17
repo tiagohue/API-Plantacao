@@ -9,6 +9,7 @@ import com.tiago.apiplantacao.repository.CanteiroRepository;
 import com.tiago.apiplantacao.repository.ResponsavelRepository;
 import com.tiago.apiplantacao.util.CanteiroMapper;
 import com.tiago.apiplantacao.util.ResponsavelMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class CanteiroServiceImpl implements CanteiroService{
         return canteiroMapper.toCanteiroDTO(canteiroRepository.findAll());
     }
 
-    @Override
+    @Override @Transactional
     public CanteiroResponseDTO register(CanteiroRequestDTO canteiroDTO) {
         Canteiro canteiro = canteiroMapper.toCanteiro(canteiroDTO);
 
@@ -45,7 +46,7 @@ public class CanteiroServiceImpl implements CanteiroService{
         return canteiroMapper.toCanteiroDTO(canteiroRepository.save(canteiro));
     }
 
-    @Override
+    @Override @Transactional
     public CanteiroResponseDTO update(CanteiroRequestDTO canteiroDTO, Long id) {
         Canteiro canteiro = returnCanteiro(id);
 
@@ -54,7 +55,7 @@ public class CanteiroServiceImpl implements CanteiroService{
         return canteiroMapper.toCanteiroDTO(canteiroRepository.save(canteiro));
     }
 
-    @Override
+    @Override @Transactional
     public String delete(Long id) {
         canteiroRepository.deleteById(id);
         return "Canteiro de id: " + id + " foi deletado.";

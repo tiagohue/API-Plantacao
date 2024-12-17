@@ -40,14 +40,14 @@ public class InsumoServiceImpl implements InsumoService{
         return insumoMapper.toInsumoDTO(insumoRepository.findAll());
     }
 
-    @Override
+    @Override @Transactional
     public InsumoResponseDTO register(InsumoRequestDTO insumoDTO) {
         Insumo insumo = insumoMapper.toInsumo(insumoDTO);
 
         return insumoMapper.toInsumoDTO(insumoRepository.save(insumo));
     }
 
-    @Override
+    @Override @Transactional
     public InsumoResponseDTO update(InsumoRequestDTO insumoDTO, Long id) {
         Insumo insumo = returnInsumo(id);
 
