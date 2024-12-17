@@ -3,6 +3,7 @@ package com.tiago.apiplantacao.service;
 import com.tiago.apiplantacao.dto.request.ResponsavelRequestDTO;
 import com.tiago.apiplantacao.dto.response.ResponsavelResponseDTO;
 import com.tiago.apiplantacao.model.Responsavel;
+import com.tiago.apiplantacao.repository.CanteiroRepository;
 import com.tiago.apiplantacao.repository.ResponsavelRepository;
 import com.tiago.apiplantacao.util.ResponsavelMapper;
 import jakarta.transaction.Transactional;
@@ -18,6 +19,7 @@ import java.util.List;
 public class ResponsavelServiceImpl implements ResponsavelService{
     private final ResponsavelRepository responsavelRepository;
     private final ResponsavelMapper responsavelMapper;
+    private final CanteiroRepository canteiroRepository;
 
     @Override
     public ResponsavelResponseDTO findById(Long id) {
@@ -54,6 +56,16 @@ public class ResponsavelServiceImpl implements ResponsavelService{
 
     @Override @Transactional
     public String delete(Long id) {
+        returnResponsavel(id);
+
+        canteiroRepository.findAll().forEach(canteiro -> {
+            if (canteiro.getResponsavel().getId() == id) {
+                Long id_canteiro = canteiro.getId();
+                throw new RuntimeException("Responsável atrelado ao canteiro de id: "+ id_canteiro
+                        +", apague ou altere o responsável do canteiro antes.");
+            }
+        });
+
         responsavelRepository.deleteById(id);
         return "Responsavel de id: " + id + " foi deletado.";
     }
