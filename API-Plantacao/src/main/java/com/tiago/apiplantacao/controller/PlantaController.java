@@ -23,6 +23,11 @@ public class PlantaController {
         return ResponseEntity.ok().body(plantaService.findById(id));
     }
 
+    @GetMapping(value = "nome/{nome}")
+    public ResponseEntity<List<PlantaResponseDTO>> findByNome(@PathVariable String nome) {
+        return ResponseEntity.ok().body(plantaService.findByNome(nome));
+    }
+
     @GetMapping
     public ResponseEntity<List<PlantaResponseDTO>> findAll() {
         return ResponseEntity.ok().body(plantaService.findAll());

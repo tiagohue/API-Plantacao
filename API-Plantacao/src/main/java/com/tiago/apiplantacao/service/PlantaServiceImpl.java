@@ -24,6 +24,13 @@ public class PlantaServiceImpl implements PlantaService{
     }
 
     @Override
+    public List<PlantaResponseDTO> findByNome(String nome) {
+        List<Planta> plantas = plantaRepository.findByNomeContaining(nome);
+
+        return plantaMapper.toPlantaDTO(plantas);
+    }
+
+    @Override
     public List<PlantaResponseDTO> findAll() {
         return plantaMapper.toPlantaDTO(plantaRepository.findAll());
     }
